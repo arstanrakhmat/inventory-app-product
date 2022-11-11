@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/mainPageFragment"
+        android:icon="@drawable/main_page_icon"
+        android:title="@string/main_page_title" />
+
+    <item
+        android:id="@+id/archivePageFragment"
+        android:icon="@drawable/archive_page_icon"
+        android:title="@string/archive_title" />
+
+</menu>
