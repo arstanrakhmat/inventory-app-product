@@ -8,17 +8,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.inventoryapp.R
 import com.example.inventoryapp.data.Product
-import com.example.inventoryapp.data.ProductViewModel
+import com.example.inventoryapp.data.ProductApplication
 import com.example.inventoryapp.databinding.FragmentAddProductBinding
+import com.example.inventoryapp.viewModelAddFragment.AddFragmentViewModel
+import com.example.inventoryapp.viewModelAddFragment.AddFragmentViewModelFactory
 
 class AddProductFragment : Fragment() {
 
-    private lateinit var mProductViewModel: ProductViewModel
     private lateinit var binding: FragmentAddProductBinding
+
+    private val mViewModel by viewModels<AddFragmentViewModel> {
+        AddFragmentViewModelFactory((requireActivity().application as ProductApplication).repository)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,12 +31,13 @@ class AddProductFragment : Fragment() {
     ): View {
 
         binding = FragmentAddProductBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        mProductViewModel = ViewModelProvider(this)[ProductViewModel::class.java]
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         clickListeners()
-
-        return binding.root
     }
 
     private fun clickListeners() {
@@ -58,11 +64,20 @@ class AddProductFragment : Fragment() {
                 productOwner,
                 amountProduct.toString().toInt()
             )
-            mProductViewModel.addProduct(product)
-            Toast.makeText(requireContext(), "Fields are filled", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.action_addProductFragment_to_mainPageFragment)
+            mViewModel.addData(product)
+//            Toast.makeText(requireContext(), "Fields are filled", Toast.LENGTH_SHORT).show()
+//            findNavController().navigate(R.id.action_addProductFragment_to_mainPageFragment)
         } else {
             Toast.makeText(requireContext(), "Fill out all fields", Toast.LENGTH_SHORT).show()
+        }
+
+        mViewModel.isDataSaved.observe(viewLifecycleOwner) {
+            it?.let {
+                if (it) {
+                    Toast.makeText(requireContext(), "Fields are filled", Toast.LENGTH_SHORT).show()
+                    findNavController().navigate(R.id.action_addProductFragment_to_mainPageFragment)
+                }
+            }
         }
 
     }
