@@ -38,7 +38,7 @@ class RecyclerListAdapter : RecyclerView.Adapter<RecyclerListAdapter.ViewHolder>
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val myId: TextView = itemView.findViewById(R.id.photoCross)
-        val myProdName: TextView = itemView.findViewById(R.id.nameProduct)
+        val myProdName: TextView = itemView.findViewById(R.id.customRowName)
         val myPrice: TextView = itemView.findViewById(R.id.price)
         val myCompanyName: TextView = itemView.findViewById(R.id.companyName)
         val myAmount: TextView = itemView.findViewById(R.id.productCount)
