@@ -4,8 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.inventoryapp.data.Product
+import com.example.inventoryapp.fragments.MainPageFragmentDirections
 
 class RecyclerListAdapter : RecyclerView.Adapter<RecyclerListAdapter.ViewHolder>() {
     private var list = emptyList<Product>()
@@ -25,6 +28,10 @@ class RecyclerListAdapter : RecyclerView.Adapter<RecyclerListAdapter.ViewHolder>
         holder.myCompanyName.text = oneUser.ownerProduct
         holder.myAmount.text = oneUser.amountPr.toString()
 
+        holder.rowLayout.setOnClickListener {
+            val action = MainPageFragmentDirections.actionMainPageFragmentToUpdateFragment(oneUser)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {
@@ -42,5 +49,7 @@ class RecyclerListAdapter : RecyclerView.Adapter<RecyclerListAdapter.ViewHolder>
         val myPrice: TextView = itemView.findViewById(R.id.price)
         val myCompanyName: TextView = itemView.findViewById(R.id.companyName)
         val myAmount: TextView = itemView.findViewById(R.id.productCount)
+
+        val rowLayout: ConstraintLayout = itemView.findViewById(R.id.rowLayout)
     }
 }

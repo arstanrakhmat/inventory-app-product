@@ -17,5 +17,14 @@ class AddFragmentViewModel(private val repository: ProductRepository) : ViewMode
         thread.shutdown()
         isDataSaved.postValue(thread.isShutdown)
     }
+
+    fun updateData(product: Product) {
+        thread.execute {
+            repository.updateProduct(product)
+        }
+
+        thread.shutdown()
+        isDataSaved.postValue(thread.isShutdown)
+    }
 }
 

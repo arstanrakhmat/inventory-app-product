@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainPageFragment_to_addProductFragment"
             app:destination="@id/addProductFragment" />
+        <action
+            android:id="@+id/action_mainPageFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
     </fragment>
     <fragment
         android:id="@+id/archivePageFragment"
@@ -27,5 +30,17 @@
         <action
             android:id="@+id/action_addProductFragment_to_mainPageFragment"
             app:destination="@id/mainPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.inventoryapp.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" >
+        <action
+            android:id="@+id/action_updateFragment_to_mainPageFragment"
+            app:destination="@id/mainPageFragment" />
+        <argument
+            android:name="curProduct"
+            app:argType="com.example.inventoryapp.data.Product" />
     </fragment>
 </navigation>

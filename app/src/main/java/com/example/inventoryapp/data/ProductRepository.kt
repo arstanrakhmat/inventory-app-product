@@ -9,4 +9,8 @@ class ProductRepository(private val productDao: ProductDao) {
     fun addProduct(product: Product) {
         productDao.addProduct(product)
     }
+
+    fun updateProduct(product: Product) {
+        productDao.updateProduct(product)
+    }
 }

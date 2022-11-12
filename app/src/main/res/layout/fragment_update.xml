@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.AddProductFragment">
+    tools:context=".UpdateFragment">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -57,7 +57,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_1">
 
         <EditText
-            android:id="@+id/nameProduct"
+            android:id="@+id/update_nameProduct"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
@@ -102,7 +102,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_2">
 
         <EditText
-            android:id="@+id/priceProduct"
+            android:id="@+id/update_priceProduct"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
@@ -147,7 +147,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_3">
 
         <EditText
-            android:id="@+id/ownerProduct"
+            android:id="@+id/update_ownerProduct"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
@@ -192,7 +192,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_4">
 
         <EditText
-            android:id="@+id/amountProduct"
+            android:id="@+id/update_amountProduct"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="10dp"
@@ -215,18 +215,18 @@
         android:backgroundTint="@color/white"
         android:text="@string/str9"
         android:textColor="#2A8CFF"
-        app:layout_constraintEnd_toStartOf="@+id/addProductBtn"
+        app:layout_constraintEnd_toStartOf="@+id/saveProductBtn"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv4" />
 
     <Button
-        android:id="@+id/addProductBtn"
+        android:id="@+id/saveProductBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:backgroundTint="#2A8CFF"
-        android:text="@string/str8"
+        android:text="@string/str11"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
