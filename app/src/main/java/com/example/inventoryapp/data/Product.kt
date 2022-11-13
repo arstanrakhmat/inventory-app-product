@@ -1,5 +1,6 @@
 package com.example.inventoryapp.data
 
+import android.graphics.Bitmap
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -7,6 +8,7 @@ import androidx.room.PrimaryKey
 data class Product(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
+    val image: Bitmap,
     val nameProduct: String,
     val price: Double,
     val ownerProduct: String,

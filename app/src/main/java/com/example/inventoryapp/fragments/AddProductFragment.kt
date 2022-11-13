@@ -1,5 +1,6 @@
 package com.example.inventoryapp.fragments
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -8,12 +9,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.launch
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.inventoryapp.R
 import com.example.inventoryapp.data.Product
 import com.example.inventoryapp.data.ProductApplication
 import com.example.inventoryapp.databinding.FragmentAddProductBinding
+import com.example.inventoryapp.loadImage
 import com.example.inventoryapp.viewModelAddFragment.AddFragmentViewModel
 import com.example.inventoryapp.viewModelAddFragment.AddFragmentViewModelFactory
 
@@ -24,6 +28,25 @@ class AddProductFragment : Fragment() {
     private val mViewModel by viewModels<AddFragmentViewModel> {
         AddFragmentViewModelFactory((requireActivity().application as ProductApplication).repository)
     }
+
+    private var bitmap: Bitmap? = null
+
+    private val getContent =
+        registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
+            if (bitmap != null) {
+                binding.photo.loadImage(bitmap)
+                this.bitmap = bitmap
+            }
+        }
+
+    private val requestSinglePermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                getContent.launch()
+            } else {
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +71,10 @@ class AddProductFragment : Fragment() {
         binding.addProductBtn.setOnClickListener {
             insertDataToDatabase()
         }
+
+        binding.photo.setOnClickListener {
+            requestSinglePermissionLauncher.launch(android.Manifest.permission.CAMERA)
+        }
     }
 
     private fun insertDataToDatabase() {
@@ -59,6 +86,7 @@ class AddProductFragment : Fragment() {
         if (inputCheck(productName, priceProduct, productOwner, amountProduct)) {
             val product = Product(
                 0,
+                bitmap!!,
                 productName,
                 priceProduct.toString().toDouble(),
                 productOwner,
@@ -79,7 +107,6 @@ class AddProductFragment : Fragment() {
                 }
             }
         }
-
     }
 
     private fun inputCheck(

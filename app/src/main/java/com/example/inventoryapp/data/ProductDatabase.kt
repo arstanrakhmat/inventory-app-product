@@ -4,8 +4,12 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
+import com.example.inventoryapp.typeConverter.TypeConverterImpl
 
 @Database(entities = [Product::class], version = 1, exportSchema = false)
+@TypeConverters(TypeConverterImpl::class)
+
 abstract class ProductDatabase : RoomDatabase() {
 
     abstract fun productDao(): ProductDao

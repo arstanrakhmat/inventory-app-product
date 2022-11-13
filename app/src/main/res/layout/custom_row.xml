@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@+id/photoCross"
         app:srcCompat="@drawable/dividor_line" />
 
-    <TextView
+    <ImageView
         android:id="@+id/photoCross"
         android:layout_width="128dp"
         android:layout_height="85dp"

@@ -3,6 +3,7 @@ package com.example.inventoryapp
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
@@ -22,7 +23,7 @@ class RecyclerListAdapter : RecyclerView.Adapter<RecyclerListAdapter.ViewHolder>
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val oneUser = list[position]
 
-        holder.myId.text = oneUser.id.toString()
+        holder.myImage.loadImage(oneUser.image)
         holder.myProdName.text = oneUser.nameProduct
         holder.myPrice.text = oneUser.price.toString()
         holder.myCompanyName.text = oneUser.ownerProduct
@@ -44,7 +45,7 @@ class RecyclerListAdapter : RecyclerView.Adapter<RecyclerListAdapter.ViewHolder>
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val myId: TextView = itemView.findViewById(R.id.photoCross)
+        val myImage: ImageView = itemView.findViewById(R.id.photoCross)
         val myProdName: TextView = itemView.findViewById(R.id.customRowName)
         val myPrice: TextView = itemView.findViewById(R.id.price)
         val myCompanyName: TextView = itemView.findViewById(R.id.companyName)

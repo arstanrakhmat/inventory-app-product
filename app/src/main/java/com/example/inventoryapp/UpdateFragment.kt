@@ -1,5 +1,6 @@
 package com.example.inventoryapp
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -8,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.result.launch
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -26,6 +29,25 @@ class UpdateFragment : Fragment() {
     }
 
     private val args by navArgs<UpdateFragmentArgs>()
+
+    private var bitmap: Bitmap? = null
+
+    private val getContent =
+        registerForActivityResult(ActivityResultContracts.TakePicturePreview()) { bitmap ->
+            if (bitmap != null) {
+                binding.updatePhoto.loadImage(bitmap)
+                this.bitmap = bitmap
+            }
+        }
+
+    private val requestSinglePermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (isGranted) {
+                getContent.launch()
+            } else {
+                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+            }
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,11 +71,16 @@ class UpdateFragment : Fragment() {
             saveProductBtn.setOnClickListener {
                 updateItem()
             }
+
+            binding.updatePhoto.setOnClickListener {
+                requestSinglePermissionLauncher.launch(android.Manifest.permission.CAMERA)
+            }
         }
     }
 
     private fun openCard() {
         binding.apply {
+            updatePhoto.setImageBitmap(args.curProduct.image)
             updateNameProduct.setText(args.curProduct.nameProduct)
             updatePriceProduct.setText(args.curProduct.price.toString())
             updateOwnerProduct.setText(args.curProduct.ownerProduct)
@@ -71,6 +98,7 @@ class UpdateFragment : Fragment() {
         if (inputCheck(prName, price, owner, amount)) {
             val product = Product(
                 args.curProduct.id,
+                bitmap!!,
                 prName,
                 price.toString().toDouble(),
                 owner,
