@@ -18,4 +18,7 @@ interface ProductDao {
 
     @Update(entity = Product::class)
     fun updateProduct(product: Product)
+
+    @Query("SELECT * FROM product_table WHERE nameProduct LIKE :searchWord ORDER BY nameProduct ASC")
+    fun getSearchProduct(searchWord: String): LiveData<List<Product>>
 }

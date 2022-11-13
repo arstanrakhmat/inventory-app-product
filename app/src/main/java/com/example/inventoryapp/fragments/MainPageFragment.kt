@@ -22,6 +22,8 @@ class MainPageFragment : Fragment() {
         MainFragmentViewModelFactory((requireActivity().application as ProductApplication).repository)
     }
 
+    private lateinit var myAdapter: RecyclerListAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,13 +42,48 @@ class MainPageFragment : Fragment() {
             addProduct()
         }
 
-        val adapter = RecyclerListAdapter()
+//        val adapter = RecyclerListAdapter()
+        myAdapter = RecyclerListAdapter()
         val recyclerView = binding.recyclerView
-        recyclerView.adapter = adapter
+        recyclerView.adapter = myAdapter
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         mViewModel.getAllData().observe(viewLifecycleOwner) {
-            adapter.setData(it)
+            myAdapter.setData(it)
+        }
+
+        searchViewSet()
+    }
+
+    private fun searchViewSet() {
+        binding.searchView.apply {
+            isSubmitButtonEnabled = true
+            setOnQueryTextListener(object :
+                androidx.appcompat.widget.SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    if (query != null) {
+                        dataObserve(query)
+                    }
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText != null) {
+                        dataObserve(newText)
+                    }
+                    return true
+                }
+            })
+        }
+    }
+
+    private fun dataObserve(querySearch: String) {
+        val searchQuery = "%$querySearch%"
+
+        mViewModel.getAllSearchProduct(searchQuery).observe(viewLifecycleOwner) {
+            it.let {
+                myAdapter.setData(it)
+            }
         }
     }
 

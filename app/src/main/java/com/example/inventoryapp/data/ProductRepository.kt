@@ -13,4 +13,8 @@ class ProductRepository(private val productDao: ProductDao) {
     fun updateProduct(product: Product) {
         productDao.updateProduct(product)
     }
+
+    fun getAllSearchProduct(searchWord: String) : LiveData<List<Product>> {
+        return productDao.getSearchProduct(searchWord)
+    }
 }
