@@ -102,7 +102,8 @@ class UpdateFragment : Fragment() {
                 prName,
                 price.toString().toDouble(),
                 owner,
-                amount.toString().toInt()
+                amount.toString().toInt(),
+                args.curProduct.isArchived
             )
 
             mViewModel.updateData(product)

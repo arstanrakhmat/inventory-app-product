@@ -12,5 +12,6 @@ data class Product(
     val nameProduct: String,
     val price: Double,
     val ownerProduct: String,
-    val amountPr: Int
-): java.io.Serializable
+    val amountPr: Int,
+    var isArchived: Boolean
+) : java.io.Serializable

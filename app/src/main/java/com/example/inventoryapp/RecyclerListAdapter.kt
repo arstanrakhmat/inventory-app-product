@@ -11,7 +11,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.inventoryapp.data.Product
 import com.example.inventoryapp.fragments.MainPageFragmentDirections
 
-class RecyclerListAdapter : RecyclerView.Adapter<RecyclerListAdapter.ViewHolder>() {
+class RecyclerListAdapter(private val listeners: RecyclerListeners) :
+    RecyclerView.Adapter<RecyclerListAdapter.ViewHolder>() {
     private var list = emptyList<Product>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,6 +34,8 @@ class RecyclerListAdapter : RecyclerView.Adapter<RecyclerListAdapter.ViewHolder>
             val action = MainPageFragmentDirections.actionMainPageFragmentToUpdateFragment(oneUser)
             holder.itemView.findNavController().navigate(action)
         }
+
+        holder.dots.setOnClickListener { listeners.archiveProduct(oneUser) }
     }
 
     override fun getItemCount(): Int {
@@ -52,5 +55,6 @@ class RecyclerListAdapter : RecyclerView.Adapter<RecyclerListAdapter.ViewHolder>
         val myAmount: TextView = itemView.findViewById(R.id.productCount)
 
         val rowLayout: ConstraintLayout = itemView.findViewById(R.id.rowLayout)
+        val dots: ImageView = itemView.findViewById(R.id.dotsVertical)
     }
 }

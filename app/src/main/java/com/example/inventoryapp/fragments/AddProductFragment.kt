@@ -90,7 +90,8 @@ class AddProductFragment : Fragment() {
                 productName,
                 priceProduct.toString().toDouble(),
                 productOwner,
-                amountProduct.toString().toInt()
+                amountProduct.toString().toInt(),
+                false
             )
             mViewModel.addData(product)
 //            Toast.makeText(requireContext(), "Fields are filled", Toast.LENGTH_SHORT).show()

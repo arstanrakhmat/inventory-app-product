@@ -3,6 +3,8 @@ package com.example.inventoryapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.inventoryapp.databinding.ActivityMainBinding
@@ -20,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.navigation_host)
         bottomNavView.setupWithNavController(navController)
 
-//        setupActionBarWithNavController(findNavController(R.id.navigation_host))
 
     }
+
 }

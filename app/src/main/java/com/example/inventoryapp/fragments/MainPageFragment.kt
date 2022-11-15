@@ -1,21 +1,26 @@
 package com.example.inventoryapp.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.inventoryapp.R
 import com.example.inventoryapp.RecyclerListAdapter
+import com.example.inventoryapp.RecyclerListeners
+import com.example.inventoryapp.data.Product
 import com.example.inventoryapp.data.ProductApplication
 import com.example.inventoryapp.databinding.FragmentMainPageBinding
 import com.example.inventoryapp.viewModelMainFragment.MainFragmentViewModel
 import com.example.inventoryapp.viewModelMainFragment.MainFragmentViewModelFactory
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 
-class MainPageFragment : Fragment() {
+class MainPageFragment : Fragment(), RecyclerListeners {
 
     private lateinit var binding: FragmentMainPageBinding
     private val mViewModel by viewModels<MainFragmentViewModel> {
@@ -43,15 +48,14 @@ class MainPageFragment : Fragment() {
         }
 
 //        val adapter = RecyclerListAdapter()
-        myAdapter = RecyclerListAdapter()
+        myAdapter = RecyclerListAdapter(this)
         val recyclerView = binding.recyclerView
         recyclerView.adapter = myAdapter
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        mViewModel.getAllData().observe(viewLifecycleOwner) {
+        mViewModel.getAllData(false).observe(viewLifecycleOwner) {
             myAdapter.setData(it)
         }
-
         searchViewSet()
     }
 
@@ -84,6 +88,42 @@ class MainPageFragment : Fragment() {
             it.let {
                 myAdapter.setData(it)
             }
+        }
+    }
+
+    override fun archiveProduct(product: Product) {
+        val bottomAlert = BottomSheetBehavior.from(binding.includeMainFragment.bottomAlert)
+        bottomAlert.state = BottomSheetBehavior.STATE_EXPANDED
+
+        binding.includeMainFragment.tv1.setOnClickListener {
+            bottomAlert.state = BottomSheetBehavior.STATE_HIDDEN
+            logicForAlertDialog(product)
+        }
+    }
+
+    private fun logicForAlertDialog(product: Product) {
+        AlertDialog.Builder(requireActivity()).apply {
+            setTitle("Архивировать ${product.nameProduct} из каталога")
+            setPositiveButton("Да") { _, _ ->
+                mViewModel.updateData(
+                    Product(
+                        product.id,
+                        product.image,
+                        product.nameProduct,
+                        product.price,
+                        product.ownerProduct,
+                        product.amountPr,
+                        true
+                    )
+                )
+                Toast.makeText(requireContext(), "Заархивировано", Toast.LENGTH_SHORT).show()
+            }
+            setNegativeButton("Нет") { p0, _ ->
+                p0.dismiss()
+            }
+
+            create()
+            show()
         }
     }
 

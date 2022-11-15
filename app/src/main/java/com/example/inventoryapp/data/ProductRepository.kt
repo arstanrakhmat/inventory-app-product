@@ -4,7 +4,9 @@ import androidx.lifecycle.LiveData
 
 class ProductRepository(private val productDao: ProductDao) {
 
-    val readAllData: LiveData<List<Product>> = productDao.readAllData()
+    fun readAllData(isArchived: Boolean) : LiveData<List<Product>> {
+        return productDao.readAllData(isArchived)
+    }
 
     fun addProduct(product: Product) {
         productDao.addProduct(product)
@@ -17,4 +19,13 @@ class ProductRepository(private val productDao: ProductDao) {
     fun getAllSearchProduct(searchWord: String) : LiveData<List<Product>> {
         return productDao.getSearchProduct(searchWord)
     }
+
+    fun getAllSearchArchiveProduct(searchWord: String) : LiveData<List<Product>> {
+        return productDao.getSearchProduct(searchWord)
+    }
+
+    suspend fun deleteProduct(id: Int) {
+        productDao.deleteItem(id)
+    }
+
 }
