@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateFragment"
-        android:name="com.example.inventoryapp.UpdateFragment"
+        android:name="com.example.inventoryapp.fragments.UpdateFragment"
         android:label="Детали о товаре"
         tools:layout="@layout/fragment_update">
         <action

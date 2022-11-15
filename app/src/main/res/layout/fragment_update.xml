@@ -1,236 +1,280 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UpdateFragment">
+    android:fillViewport="true"
+    tools:context=".fragments.UpdateFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginStart="105dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="105dp"
-        app:cardBackgroundColor="#F6F7F7"
-        app:cardCornerRadius="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <ImageView
-            android:id="@+id/updatePhoto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/photos_will_be_added" />
-
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/tv_1"
-        android:layout_width="wrap_content"
-        android:layout_height="14dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/str1"
-        android:textAlignment="viewStart"
-        android:textColor="#A6A7A7"
-        android:textFontWeight="500"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView"
-        tools:targetApi="28" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv1"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="16dp"
-        app:cardBackgroundColor="#F3F3F4"
-        app:cardCornerRadius="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_1">
+        android:layout_height="wrap_content">
 
-        <EditText
-            android:id="@+id/update_nameProduct"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
+            android:layout_height="50dp"
+            android:background="@null"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/arrow_back"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/details"
+                    android:textColor="@color/toolbar"
+                    android:textSize="24sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/back" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="105dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="105dp"
+            app:cardBackgroundColor="#F6F7F7"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+
+            <ImageView
+                android:id="@+id/updatePhoto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@string/photos_will_be_added" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="30dp"
             android:fontFamily="@font/roboto"
-            android:gravity="center_vertical"
-            android:hint="@string/str2"
-            android:inputType="textPersonName"
-            android:textColor="@color/black"
-            android:textFontWeight="400"
-            android:textSize="16sp"
+            android:text="@string/str1"
+            android:textAlignment="viewStart"
+            android:textColor="#A6A7A7"
+            android:textFontWeight="500"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
             tools:targetApi="28" />
 
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/tv_2"
-        android:layout_width="wrap_content"
-        android:layout_height="14dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/str3"
-        android:textAlignment="viewStart"
-        android:textColor="#A6A7A7"
-        android:textFontWeight="500"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv1"
-        tools:targetApi="28" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv2"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="16dp"
-        app:cardBackgroundColor="#F3F3F4"
-        app:cardCornerRadius="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_2">
-
-        <EditText
-            android:id="@+id/update_priceProduct"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="#F3F3F4"
+            app:cardCornerRadius="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_1">
+
+            <EditText
+                android:id="@+id/update_nameProduct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto"
+                android:gravity="center_vertical"
+                android:hint="@string/str2"
+                android:inputType="textPersonName"
+                android:textColor="@color/black"
+                android:textFontWeight="400"
+                android:textSize="16sp"
+                tools:targetApi="28" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/roboto"
-            android:gravity="center_vertical"
-            android:hint="@string/str4"
-            android:inputType="number"
-            android:textColor="@color/black"
-            android:textFontWeight="400"
-            android:textSize="16sp"
+            android:text="@string/str3"
+            android:textAlignment="viewStart"
+            android:textColor="#A6A7A7"
+            android:textFontWeight="500"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv1"
             tools:targetApi="28" />
 
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/tv_3"
-        android:layout_width="wrap_content"
-        android:layout_height="14dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/str5"
-        android:textAlignment="viewStart"
-        android:textColor="#A6A7A7"
-        android:textFontWeight="500"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv2"
-        tools:targetApi="28" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv3"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="16dp"
-        app:cardBackgroundColor="#F3F3F4"
-        app:cardCornerRadius="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_3">
-
-        <EditText
-            android:id="@+id/update_ownerProduct"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="#F3F3F4"
+            app:cardCornerRadius="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_2">
+
+            <EditText
+                android:id="@+id/update_priceProduct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto"
+                android:gravity="center_vertical"
+                android:hint="@string/str4"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textFontWeight="400"
+                android:textSize="16sp"
+                tools:targetApi="28" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/roboto"
-            android:gravity="center_vertical"
-            android:hint="@string/str6"
-            android:inputType="textPersonName"
-            android:textColor="@color/black"
-            android:textFontWeight="400"
-            android:textSize="16sp"
+            android:text="@string/str5"
+            android:textAlignment="viewStart"
+            android:textColor="#A6A7A7"
+            android:textFontWeight="500"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv2"
             tools:targetApi="28" />
 
-    </androidx.cardview.widget.CardView>
-
-    <TextView
-        android:id="@+id/tv_4"
-        android:layout_width="wrap_content"
-        android:layout_height="14dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/roboto"
-        android:text="@string/str7"
-        android:textAlignment="viewStart"
-        android:textColor="#A6A7A7"
-        android:textFontWeight="500"
-        android:textSize="12sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv3"
-        tools:targetApi="28" />
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cv4"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="16dp"
-        app:cardBackgroundColor="#F3F3F4"
-        app:cardCornerRadius="28dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_4">
-
-        <EditText
-            android:id="@+id/update_amountProduct"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv3"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="#F3F3F4"
+            app:cardCornerRadius="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_3">
+
+            <EditText
+                android:id="@+id/update_ownerProduct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto"
+                android:gravity="center_vertical"
+                android:hint="@string/str6"
+                android:inputType="textPersonName"
+                android:textColor="@color/black"
+                android:textFontWeight="400"
+                android:textSize="16sp"
+                tools:targetApi="28" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/tv_4"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
             android:fontFamily="@font/roboto"
-            android:gravity="center_vertical"
-            android:hint="@string/str7"
-            android:inputType="number"
-            android:textColor="@color/black"
-            android:textFontWeight="400"
-            android:textSize="16sp"
+            android:text="@string/str7"
+            android:textAlignment="viewStart"
+            android:textColor="#A6A7A7"
+            android:textFontWeight="500"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv3"
             tools:targetApi="28" />
 
-    </androidx.cardview.widget.CardView>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv4"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginEnd="16dp"
+            app:cardBackgroundColor="#F3F3F4"
+            app:cardCornerRadius="28dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_4">
 
-    <Button
-        android:id="@+id/cancelBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="@color/white"
-        android:text="@string/str9"
-        android:textColor="#2A8CFF"
-        app:layout_constraintEnd_toStartOf="@+id/saveProductBtn"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cv4" />
+            <EditText
+                android:id="@+id/update_amountProduct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:fontFamily="@font/roboto"
+                android:gravity="center_vertical"
+                android:hint="@string/str7"
+                android:inputType="number"
+                android:textColor="@color/black"
+                android:textFontWeight="400"
+                android:textSize="16sp"
+                tools:targetApi="28" />
 
-    <Button
-        android:id="@+id/saveProductBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:backgroundTint="#2A8CFF"
-        android:text="@string/str11"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/cancelBtn"
-        app:layout_constraintTop_toBottomOf="@+id/cv4" />
+        </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/cancelBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="@color/white"
+            android:text="@string/str9"
+            android:textColor="#2A8CFF"
+            app:layout_constraintEnd_toStartOf="@+id/saveProductBtn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cv4" />
+
+        <Button
+            android:id="@+id/saveProductBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:backgroundTint="#2A8CFF"
+            android:text="@string/str11"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/cancelBtn"
+            app:layout_constraintTop_toBottomOf="@+id/cv4" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

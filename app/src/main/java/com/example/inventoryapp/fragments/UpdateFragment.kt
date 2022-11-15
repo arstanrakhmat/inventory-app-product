@@ -1,4 +1,4 @@
-package com.example.inventoryapp
+package com.example.inventoryapp.fragments
 
 import android.graphics.Bitmap
 import android.os.Bundle
@@ -14,9 +14,11 @@ import androidx.activity.result.launch
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.inventoryapp.R
 import com.example.inventoryapp.data.Product
 import com.example.inventoryapp.data.ProductApplication
 import com.example.inventoryapp.databinding.FragmentUpdateBinding
+import com.example.inventoryapp.loadImage
 import com.example.inventoryapp.viewModelAddFragment.AddFragmentViewModel
 import com.example.inventoryapp.viewModelAddFragment.AddFragmentViewModelFactory
 
@@ -75,7 +77,15 @@ class UpdateFragment : Fragment() {
             binding.updatePhoto.setOnClickListener {
                 requestSinglePermissionLauncher.launch(android.Manifest.permission.CAMERA)
             }
+
+            binding.back.setOnClickListener {
+                navigateUp()
+            }
         }
+    }
+
+    private fun navigateUp() {
+        findNavController().navigateUp()
     }
 
     private fun openCard() {
@@ -111,6 +121,8 @@ class UpdateFragment : Fragment() {
             findNavController().navigate(R.id.action_updateFragment_to_mainPageFragment)
         }
     }
+
+
 
     private fun inputCheck(
         productName: String,

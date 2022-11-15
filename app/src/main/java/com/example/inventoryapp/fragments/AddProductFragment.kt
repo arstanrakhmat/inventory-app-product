@@ -75,6 +75,15 @@ class AddProductFragment : Fragment() {
         binding.photo.setOnClickListener {
             requestSinglePermissionLauncher.launch(android.Manifest.permission.CAMERA)
         }
+
+        binding.back.setOnClickListener {
+
+            navigateUp()
+        }
+    }
+
+    private fun navigateUp() {
+        findNavController().navigateUp()
     }
 
     private fun insertDataToDatabase() {

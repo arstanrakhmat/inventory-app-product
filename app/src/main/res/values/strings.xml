@@ -20,4 +20,8 @@
     <string name="str11">Сохранить</string>
     <string name="archive">Архивировать</string>
     <string name="geeksforgeeks">GeeksForGeeks</string>
+    <string name="mainPage">Главное</string>
+    <string name="addProduct">Добавить товар</string>
+    <string name="archiveFragment">Архив</string>
+    <string name="details">Детали о товаре</string>
 </resources>
