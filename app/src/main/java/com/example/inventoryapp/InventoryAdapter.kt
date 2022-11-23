@@ -1,7 +1,6 @@
 package com.example.inventoryapp
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
@@ -9,16 +8,17 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.inventoryapp.data.Product
-import com.example.inventoryapp.fragments.MainPageFragmentDirections
+import com.example.inventoryapp.databinding.CustomRowBinding
+import com.example.inventoryapp.fragments.MainFragmentDirections
 
-class RecyclerListAdapter(private val listeners: RecyclerListeners) :
-    RecyclerView.Adapter<RecyclerListAdapter.ViewHolder>() {
+class InventoryAdapter(private val listeners: RecyclerListeners) :
+    RecyclerView.Adapter<InventoryAdapter.ViewHolder>() {
     private var list = emptyList<Product>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.custom_row, parent, false)
-        )
+        val binding = CustomRowBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -31,7 +31,7 @@ class RecyclerListAdapter(private val listeners: RecyclerListeners) :
         holder.myAmount.text = oneUser.amountPr.toString()
 
         holder.rowLayout.setOnClickListener {
-            val action = MainPageFragmentDirections.actionMainPageFragmentToUpdateFragment(oneUser)
+            val action = MainFragmentDirections.actionMainPageFragmentToUpdateFragment(oneUser)
             holder.itemView.findNavController().navigate(action)
         }
 
@@ -47,14 +47,14 @@ class RecyclerListAdapter(private val listeners: RecyclerListeners) :
         notifyDataSetChanged()
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val myImage: ImageView = itemView.findViewById(R.id.photoCross)
-        val myProdName: TextView = itemView.findViewById(R.id.customRowName)
-        val myPrice: TextView = itemView.findViewById(R.id.price)
-        val myCompanyName: TextView = itemView.findViewById(R.id.companyName)
-        val myAmount: TextView = itemView.findViewById(R.id.productCount)
+    class ViewHolder(binding: CustomRowBinding) : RecyclerView.ViewHolder(binding.root) {
+        val myImage: ImageView = binding.photoCross
+        val myProdName: TextView = binding.customRowName
+        val myPrice: TextView = binding.price
+        val myCompanyName: TextView = binding.companyName
+        val myAmount: TextView = binding.productCount
 
-        val rowLayout: ConstraintLayout = itemView.findViewById(R.id.rowLayout)
-        val dots: ImageView = itemView.findViewById(R.id.dotsVertical)
+        val rowLayout: ConstraintLayout = binding.rowLayout
+        val dots: ImageView = binding.dotsVertical
     }
 }

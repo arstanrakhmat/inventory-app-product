@@ -11,23 +11,23 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.inventoryapp.R
-import com.example.inventoryapp.RecyclerListAdapter
+import com.example.inventoryapp.InventoryAdapter
 import com.example.inventoryapp.RecyclerListeners
 import com.example.inventoryapp.data.Product
 import com.example.inventoryapp.data.ProductApplication
 import com.example.inventoryapp.databinding.FragmentMainPageBinding
-import com.example.inventoryapp.viewModelMainFragment.MainFragmentViewModel
-import com.example.inventoryapp.viewModelMainFragment.MainFragmentViewModelFactory
+import com.example.inventoryapp.viewModelMain.MainViewModel
+import com.example.inventoryapp.viewModelMain.MainViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
-class MainPageFragment : Fragment(), RecyclerListeners {
+class MainFragment : Fragment(), RecyclerListeners {
 
     private lateinit var binding: FragmentMainPageBinding
-    private val mViewModel by viewModels<MainFragmentViewModel> {
-        MainFragmentViewModelFactory((requireActivity().application as ProductApplication).repository)
+    private val mViewModel by viewModels<MainViewModel> {
+        MainViewModelFactory((requireActivity().application as ProductApplication).repository)
     }
 
-    private lateinit var myAdapter: RecyclerListAdapter
+    private lateinit var myAdapter: InventoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,7 +48,7 @@ class MainPageFragment : Fragment(), RecyclerListeners {
         }
 
 //        val adapter = RecyclerListAdapter()
-        myAdapter = RecyclerListAdapter(this)
+        myAdapter = InventoryAdapter(this)
         val recyclerView = binding.recyclerView
         recyclerView.adapter = myAdapter
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)

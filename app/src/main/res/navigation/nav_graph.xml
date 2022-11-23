@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/mainPageFragment"
-        android:name="com.example.inventoryapp.fragments.MainPageFragment"
+        android:name="com.example.inventoryapp.fragments.MainFragment"
         android:label="Главное"
         tools:layout="@layout/fragment_main_page">
         <action
@@ -19,12 +19,12 @@
     </fragment>
     <fragment
         android:id="@+id/archivePageFragment"
-        android:name="com.example.inventoryapp.fragments.ArchivePageFragment"
+        android:name="com.example.inventoryapp.fragments.ArchiveFragment"
         android:label="Архив"
         tools:layout="@layout/fragment_archive_page" />
     <fragment
         android:id="@+id/addProductFragment"
-        android:name="com.example.inventoryapp.fragments.AddProductFragment"
+        android:name="com.example.inventoryapp.fragments.AddFragment"
         android:label="Добавить товар"
         tools:layout="@layout/fragment_add_product">
         <action

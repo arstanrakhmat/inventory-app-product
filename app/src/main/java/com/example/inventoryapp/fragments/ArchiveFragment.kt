@@ -9,24 +9,25 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.inventoryapp.RecyclerListAdapter
+import com.example.inventoryapp.R
+import com.example.inventoryapp.InventoryAdapter
 import com.example.inventoryapp.RecyclerListeners
 import com.example.inventoryapp.data.Product
 import com.example.inventoryapp.data.ProductApplication
 import com.example.inventoryapp.databinding.FragmentArchivePageBinding
-import com.example.inventoryapp.viewModelArchiveFragment.ArchiveFragmentViewModel
-import com.example.inventoryapp.viewModelArchiveFragment.ArchiveFragmentViewModelFactory
+import com.example.inventoryapp.viewModelArchive.ArchiveViewModel
+import com.example.inventoryapp.viewModelArchive.ArchiveViewModelFactory
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 
-class ArchivePageFragment : Fragment(), RecyclerListeners {
+class ArchiveFragment : Fragment(), RecyclerListeners {
 
     private lateinit var binding: FragmentArchivePageBinding
 
-    private val mViewModel by viewModels<ArchiveFragmentViewModel> {
-        ArchiveFragmentViewModelFactory((requireActivity().application as ProductApplication).repository)
+    private val mViewModel by viewModels<ArchiveViewModel> {
+        ArchiveViewModelFactory((requireActivity().application as ProductApplication).repository)
     }
 
-    private lateinit var myAdapter: RecyclerListAdapter
+    private lateinit var myAdapter: InventoryAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +42,7 @@ class ArchivePageFragment : Fragment(), RecyclerListeners {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        myAdapter = RecyclerListAdapter(this)
+        myAdapter = InventoryAdapter(this)
         val recyclerView = binding.recyclerViewInArchive
         recyclerView.adapter = myAdapter
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
@@ -90,9 +91,9 @@ class ArchivePageFragment : Fragment(), RecyclerListeners {
 
     private fun bottomAlertSettings() {
         with(binding.include) {
-            tv1.text = "Востановить"
+            tv1.text = getString(R.string.reestablish)
             tv2.apply {
-                text = "Удалить"
+                text = getString(R.string.delete)
                 visibility = View.VISIBLE
             }
         }
@@ -116,12 +117,13 @@ class ArchivePageFragment : Fragment(), RecyclerListeners {
     private fun logicForAlertDialog1(product: Product) {
         AlertDialog.Builder(requireContext()).apply {
             setTitle("Удалить ${product.nameProduct} из архива?")
-            setPositiveButton("Удалить") { p0, _ ->
+            setPositiveButton(getString(R.string.delete)) { p0, _ ->
                 mViewModel.deleteProduct(product.id)
                 p0.dismiss()
-                Toast.makeText(requireContext(), "Удалено", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), getString(R.string.deleted), Toast.LENGTH_SHORT)
+                    .show()
             }
-            setNegativeButton("Нет") { p0, _ ->
+            setNegativeButton(getString(R.string.no)) { p0, _ ->
                 p0.dismiss()
             }
             create()
@@ -132,12 +134,16 @@ class ArchivePageFragment : Fragment(), RecyclerListeners {
     private fun logicForAlertDialog2(product: Product) {
         AlertDialog.Builder(requireContext()).apply {
             setTitle("Востановить ${product.nameProduct} из архива?")
-            setPositiveButton("Да") { p0, _ ->
+            setPositiveButton(getString(R.string.yes)) { p0, _ ->
                 mViewModel.unArchiveData(product)
                 p0.dismiss()
-                Toast.makeText(requireContext(), "Востановлено", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.reestablished),
+                    Toast.LENGTH_SHORT
+                ).show()
             }
-            setNegativeButton("Нет") { p0, _ ->
+            setNegativeButton(getString(R.string.no)) { p0, _ ->
                 p0.dismiss()
             }
             create()

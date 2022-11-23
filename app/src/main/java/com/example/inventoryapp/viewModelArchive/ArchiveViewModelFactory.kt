@@ -1,16 +1,15 @@
-package com.example.inventoryapp.viewModelArchiveFragment
+package com.example.inventoryapp.viewModelArchive
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.inventoryapp.data.ProductRepository
-import com.example.inventoryapp.viewModelMainFragment.MainFragmentViewModel
 
-class ArchiveFragmentViewModelFactory(private val repository: ProductRepository) :
+class ArchiveViewModelFactory(private val repository: ProductRepository) :
     ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ArchiveFragmentViewModel::class.java)) {
+        if (modelClass.isAssignableFrom(ArchiveViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
-            return ArchiveFragmentViewModel(repository) as T
+            return ArchiveViewModel(repository) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
     }

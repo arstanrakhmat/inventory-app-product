@@ -24,4 +24,16 @@
     <string name="addProduct">Добавить товар</string>
     <string name="archiveFragment">Архив</string>
     <string name="details">Детали о товаре</string>
+
+    <string name="delete">Удалить</string>
+    <string name="deleted">Удалено</string>
+    <string name="no">Нет</string>
+    <string name="yes">Да</string>
+    <string name="reestablish">Востановить</string>
+    <string name="reestablished">Востановлено</string>
+    <string name="fillOutAllFields">Fill out all fields</string>
+    <string name="fieldsAreField">Fields are field</string>
+    <string name="updatedSuc">Update successfully</string>
+    <string name="dollarSign">$</string>
+    <string name="nike">Nike</string>
 </resources>

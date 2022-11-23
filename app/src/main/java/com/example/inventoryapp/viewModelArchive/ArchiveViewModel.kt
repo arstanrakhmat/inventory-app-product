@@ -1,4 +1,4 @@
-package com.example.inventoryapp.viewModelArchiveFragment
+package com.example.inventoryapp.viewModelArchive
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +8,7 @@ import com.example.inventoryapp.data.ProductRepository
 import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 
-class ArchiveFragmentViewModel(private val repository: ProductRepository) : ViewModel() {
+class ArchiveViewModel(private val repository: ProductRepository) : ViewModel() {
 
     val archiveProducts = repository.readAllData(true)
 

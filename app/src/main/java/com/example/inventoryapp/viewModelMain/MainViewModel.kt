@@ -1,4 +1,4 @@
-package com.example.inventoryapp.viewModelMainFragment
+package com.example.inventoryapp.viewModelMain
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,7 @@ import com.example.inventoryapp.data.Product
 import com.example.inventoryapp.data.ProductRepository
 import java.util.concurrent.Executors
 
-class MainFragmentViewModel(private val repository: ProductRepository) : ViewModel() {
+class MainViewModel(private val repository: ProductRepository) : ViewModel() {
     val isDataSaved = MutableLiveData<Boolean?>()
     private val thread = Executors.newSingleThreadExecutor()
 

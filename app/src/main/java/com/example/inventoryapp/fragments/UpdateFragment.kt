@@ -1,6 +1,9 @@
 package com.example.inventoryapp.fragments
 
+import android.app.Activity
+import android.content.Intent
 import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
@@ -10,7 +13,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.activity.result.launch
+import androidx.core.view.drawToBitmap
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -19,15 +22,15 @@ import com.example.inventoryapp.data.Product
 import com.example.inventoryapp.data.ProductApplication
 import com.example.inventoryapp.databinding.FragmentUpdateBinding
 import com.example.inventoryapp.loadImage
-import com.example.inventoryapp.viewModelAddFragment.AddFragmentViewModel
-import com.example.inventoryapp.viewModelAddFragment.AddFragmentViewModelFactory
+import com.example.inventoryapp.viewModelAdd.AddViewModel
+import com.example.inventoryapp.viewModelAdd.AddViewModelFactory
 
 class UpdateFragment : Fragment() {
 
     private lateinit var binding: FragmentUpdateBinding
 
-    private val mViewModel by viewModels<AddFragmentViewModel> {
-        AddFragmentViewModelFactory((requireActivity().application as ProductApplication).repository)
+    private val mViewModel by viewModels<AddViewModel> {
+        AddViewModelFactory((requireActivity().application as ProductApplication).repository)
     }
 
     private val args by navArgs<UpdateFragmentArgs>()
@@ -42,14 +45,14 @@ class UpdateFragment : Fragment() {
             }
         }
 
-    private val requestSinglePermissionLauncher =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            if (isGranted) {
-                getContent.launch()
-            } else {
-                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
-            }
-        }
+//    private val requestSinglePermissionLauncher =
+//        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+//            if (isGranted) {
+//                getContent.launch()
+//            } else {
+//                Toast.makeText(requireContext(), "Error", Toast.LENGTH_SHORT).show()
+//            }
+//        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,7 +78,7 @@ class UpdateFragment : Fragment() {
             }
 
             binding.updatePhoto.setOnClickListener {
-                requestSinglePermissionLauncher.launch(android.Manifest.permission.CAMERA)
+                pickImageGallery()
             }
 
             binding.back.setOnClickListener {
@@ -99,7 +102,7 @@ class UpdateFragment : Fragment() {
     }
 
     private fun updateItem() {
-
+        val photo = binding.updatePhoto
         val prName = binding.updateNameProduct.text.toString()
         val price = binding.updatePriceProduct.text
         val owner = binding.updateOwnerProduct.text.toString()
@@ -108,7 +111,7 @@ class UpdateFragment : Fragment() {
         if (inputCheck(prName, price, owner, amount)) {
             val product = Product(
                 args.curProduct.id,
-                bitmap!!,
+                photo.drawToBitmap(),
                 prName,
                 price.toString().toDouble(),
                 owner,
@@ -122,7 +125,19 @@ class UpdateFragment : Fragment() {
         }
     }
 
+    private fun pickImageGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, AddFragment.IMAGE_REQUEST_CODE)
+    }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == AddFragment.IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            val path: Uri? = data?.data
+            binding.updatePhoto.setImageURI(path)
+        }
+    }
 
     private fun inputCheck(
         productName: String,
